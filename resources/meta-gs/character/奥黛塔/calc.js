@@ -13,11 +13,11 @@ const stellarDmg = ({ attr, calc }, { basic }, multiplier, reaction) => {
 
 export const details = [{
   title: '二段E星超导伤害',
-  params: { Huacai: true, Stellar: true },
+  params: { Huacai: true, Stellar: true, Q: true },
   dmg: (data, dmg) => stellarDmg(data, dmg, data.talent.e['破晓终奏星超导/星扩散伤害'][0], 'stellarConduct')
 }, {
   title: '二段E星扩散伤害',
-  params: { Huacai: true, Stellar: true },
+  params: { Huacai: true, Stellar: true, Q: true },
   dmg: (data, dmg) => stellarDmg(data, dmg, data.talent.e['破晓终奏星超导/星扩散伤害'][1], 'stellarSwirl')
 }, {
   title: 'Q斩击伤害',
@@ -63,6 +63,10 @@ export const buffs = [{
   data: {
     multi: ({ attr, calc }) => Math.min(Math.max((calc(attr.atk) - 1000) / 100 * 1.5, 0), 30)
   }
+}, {
+  check: ({ params }) => params.Q === true && params.Stellar === true,
+  title: '奥黛塔Q：雪鹄之梦使星烁反应伤害提升[stellarConduct]%',
+  data: stellarBonus(({ talent }) => talent.q['雪鹄之梦星烁反应伤害提升'])
 }, {
   check: ds => hasHuacai(ds) && isStellar(ds),
   cons: 6,
