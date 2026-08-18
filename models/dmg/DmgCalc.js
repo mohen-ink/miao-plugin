@@ -225,7 +225,8 @@ let DmgCalc = {
       case 'lunarBloom':
       case 'lunarCharged':
       case 'lunarCrystallize':
-      case 'stellarConduct': {
+      case 'stellarConduct':
+      case 'stellarSwirl': {
         let lunarBase = dmgBase ? dmgBase : eleBaseDmg[level]
         if (ele === 'lunarCharged') {
           eleNum = dmgBase ? 3 : eleNum
@@ -234,6 +235,9 @@ let DmgCalc = {
         } else if (ele === 'stellarConduct') {
           // 星超导根据hit数的不同，有 1.45 - 2.0 不等的倍率，这里暂时默认为最大值 2.0
           eleNum = dmgBase ? 2 : eleNum
+        } else if (ele === 'stellarSwirl') {
+          // 直伤星扩散的反应系数固定为 1.0
+          eleNum = dmgBase ? 1 : eleNum
         } else {
           eleNum = 1
         }
